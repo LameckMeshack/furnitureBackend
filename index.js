@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const productRoutes = require("./routes/productsRoutes");
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 dotenv.config();
 
@@ -17,15 +17,9 @@ mongoose
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
-
 //Endpoints
 app.use("/api/products", productRoutes);
 
-
-
-
-app.listen(port, () =>
-  console.log(`Example app listening on port ${port}!`.blue)
+app.listen(process.env.PORT || port, () =>
+  console.log(`Example app listening on port ${process.env.PORT}!`.blue)
 );
-
-
