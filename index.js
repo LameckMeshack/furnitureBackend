@@ -3,6 +3,7 @@ const color = require("colors");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const productRoutes = require("./routes/productsRoutes");
+const authRoutes = require("./routes/authRoutes");
 const cors = require("cors");
 
 const app = express();
@@ -22,10 +23,8 @@ app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
 //Endpoints
 app.use("/api/products", productRoutes);
+app.use("/api/", authRoutes);
 
-app.listen(process.env.PORT || port, '0.0.0.0', () =>
-  console.log(
-    `Example app listening on port ${process.env.PORT}!`
-      .blue
-  )
+app.listen(process.env.PORT || port, "0.0.0.0", () =>
+  console.log(`Example app listening on port ${process.env.PORT}!`.blue)
 );
