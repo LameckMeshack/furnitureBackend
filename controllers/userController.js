@@ -1,7 +1,7 @@
 const User = require("../models/User");
 
 module.exports = {
-  deleteUser: async (res, req) => {
+  deleteUser: async (req, res) => {
     try {
       await User.findByIdAndDelete(req.params.id);
       return res.status(200).json("User successfully Deleted");
