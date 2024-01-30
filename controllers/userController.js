@@ -12,5 +12,18 @@ module.exports = {
       });
     }
   },
-  getUser: async (res, req) => {},
+  getUser: async (res, req) => {
+    try {
+      const user = await User.findById(req.params.id);
+
+      const { password, __v, createdArt, updatedAt, ...userData } = user._doc;
+
+      res.status(200).json("Successfully Deleted");
+    } catch (error) {
+      return res.status(500).json({
+        error: error.message,
+        message: "Failed to get user",
+      });
+    }
+  },
 };
