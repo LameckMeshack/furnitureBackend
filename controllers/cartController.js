@@ -14,13 +14,13 @@ module.exports = {
         );
 
         if (existingProduct) {
-          existingProduct.quantity + 1;
+          existingProduct.quantity += 1;
         } else {
           cart.products.push({ cartItem, quantity });
         }
 
         await cart.save();
-        return response.status(200).json("Product added to cart");
+        return res.status(200).json("Product added to cart");
       } else {
         const newCart = new Cart({
           userId,
@@ -80,7 +80,7 @@ module.exports = {
   decrementCartItem: async (req, res) => {
     const { userId, cartItem } = req.body;
     try {
-      const cart = Cart.findOne({ userId });
+      const cart = await Cart.findOne({ userId });
 
       if (!cart) {
         return res.status(404).json({ message: "Cart not found" });
@@ -110,6 +110,7 @@ module.exports = {
 
       return res.status(200).json("Product updated successfully");
     } catch (error) {
+      
       return res
         .status(500)
         .json({ error: error.message, message: "Failed to decrement product" });

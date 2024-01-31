@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const productRouter = require("./routes/productsRoutes");
 const authRouter = require("./routes/authRoutes");
 const userRouter = require("./routes/userRoutes");
+const cartRouter = require("./routes/cartRoutes");
 const cors = require("cors");
 
 const app = express();
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use("/api/products", productRouter);
 app.use("/api/", authRouter);
 app.use("/api/users", userRouter);
+app.use("/api/cart", cartRouter);
 
 app.listen(process.env.PORT || port, "0.0.0.0", () =>
   console.log(`Example app listening on port ${process.env.PORT}!`.blue)
