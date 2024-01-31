@@ -35,9 +35,30 @@ module.exports = {
         await newCart.save();
         return res.status(200).json("Product added to cart");
       }
-    } catch (error) {}
+    } catch (error) {
+
+        return res
+          .status(500)
+          .json({ error: error.message, message: "Failed to add product" });
+
+    }
   },
-  getCart: async (req, res) => {},
+  getCart: async (req, res) => {
+    const userId = req.params.id;
+
+    try {
+      const cart = await Cart.find({ userId }).populate(
+        "products.cartItem",
+        "_id title supplier price imageUrl"
+      );
+
+      return res.status(200).json(cart);
+    } catch (error) {
+     return res
+       .status(500)
+       .json({ error: error.message, message: "Failed to get product" });
+    }
+  },
   deleteCartItem: async (req, res) => {
     const { userId, cartItem } = req.body;
     try {
