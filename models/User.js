@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema(
     },
     location: {
       type: String,
-      default: "Nairobi Kenya",
+      required: true,
     },
   },
 
